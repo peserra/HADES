@@ -1,4 +1,4 @@
-package Java;
+package hades;
 
 import java.util.Date;
 
