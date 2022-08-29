@@ -2,7 +2,7 @@ package hades;
 
 import java.util.Scanner;
 
-import javax.swing.SwingConstants;
+
 
 public class App {
     public static void main(String[] args) {
@@ -17,14 +17,14 @@ public class App {
         Gerente gerente;
         Analista analista;
         while (execute) {
-            System.out.println("Bem vindo ao HADES! Selecione uma das funções abaixo?\n1 - Cadastrar\n2 - Fazer Login\n3 - sair");
+            System.out.println("Bem vindo ao HADES! Selecione uma das funções abaixo:\n1 - Cadastrar\n2 - Fazer Login\n3 - sair");
 
             Scanner input = new Scanner(System.in);
             telaInicial = input.nextInt();
 
             switch (telaInicial) {
                 case 1:
-                    System.out.println("Que tipo de cadastro deseja fazer?\n1 - Cliente\n2 - Gerente\n3 - Analista");
+                    System.out.println("Selecione um tipo de cadastro:\n1 - Cliente\n2 - Gerente\n3 - Analista");
                     escolhaCadastro = input.nextInt();
                     switch (escolhaCadastro) {
                         case 1:
@@ -133,8 +133,15 @@ public class App {
                                    }
                                 }
                             }
+                            break;
 
                         case 2:// login gerente
+                            System.out.println("Digite seu Identificador: ");
+                            user = input.next();
+                            System.out.println("Digite sua senha: ");
+                            senha = input.next();
+                            usuario = Usuario.isCadastroOk(user, senha, "Gerente");
+                            break; 
                         case 3:// login analista
 
                     }

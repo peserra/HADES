@@ -8,6 +8,9 @@ public abstract class Usuario {
     private long id;
     private String nome;
     private String senha;
+    private static final String CLIENTE = "Cliente";
+    private static final String GERENTE = "Gerente";
+    private static final String Analista = "Analista";
     private static List<Cliente> listaClientes = new LinkedList<Cliente>();
     private static List<Gerente> listaGerentes = new LinkedList<Gerente>();
     private static List<Analista> listaAnalistas = new LinkedList<Analista>();
@@ -97,37 +100,35 @@ public abstract class Usuario {
         return cadastroOk;
     }
 
-    private static Usuario verificaCadastro(String login, String senha, String entidadeBuscada) {
+   
 
-        switch (entidadeBuscada.toUpperCase()) {
-            case "CLIENTE":
-                if (!listaClientes.isEmpty()) {
-                    for (Cliente cliente : listaClientes) {
-                        if ((cliente.getCnpj() == login) && (cliente.getSenha() == senha)) {
-                            return cliente;
-                        }
+    private static Usuario verificaCadastro(String login, String senha, String entidadeBuscada) {
+        if(entidadeBuscada.equals(CLIENTE)) {
+            if (!listaClientes.isEmpty()) {
+                for (Cliente cliente : listaClientes) {
+                    if ((cliente.getCnpj().equals(login)) && (cliente.getSenha().equals(senha))) {
+                        return cliente;
                     }
                 }
-                break;
-            case "GERENTE":
-                if (!listaGerentes.isEmpty()) {
-                    for (Gerente gerente : listaGerentes) {
-                        if (gerente.getIdentificador() == login && gerente.getSenha() == senha) {
-                            return gerente;
-                        }
+            }
+        } else if (entidadeBuscada.equals(GERENTE)) {
+            if (!listaGerentes.isEmpty()) {
+                for (Gerente gerente : listaGerentes) {
+                    if (gerente.getIdentificador().equals(login) && gerente.getSenha().equals(senha)) {
+                        return gerente;
                     }
                 }
-                break;
-            case "ANALISTA":
-                if (!listaAnalistas.isEmpty()) {
-                    for (Analista analista : listaAnalistas) {
-                        if (analista.getIdentificador() == login && analista.getSenha() == senha) {
-                            return analista;
-                        }
+            }           
+
+        }else if (entidadeBuscada.equals(Analista)) {
+            if (!listaAnalistas.isEmpty()) {
+                for (Analista analista : listaAnalistas) {
+                    if (analista.getIdentificador().equals(login) && analista.getSenha().equals(senha)) {
+                        return analista;
                     }
                 }
-                break;
-        }
+            }
+        }        
 
         return null;
     }
