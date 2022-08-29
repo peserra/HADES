@@ -1,1 +1,0 @@
-Criar classe Login para analista, cliente e gerente herdarem dela

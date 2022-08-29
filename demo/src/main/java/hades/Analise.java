@@ -4,29 +4,27 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Analise {
-    private Cliente cliente;
+    
     private Analista analista;
     private String resultado;
     private String classificacao;
-    private List<Double> analisadas;
-    private int pontuacao = 0;
+    private int pontuacao;
+    private List<Transacao> analisadas;
 
-    public Analise(Analista analista, Cliente cliente) {
-        this.cliente = cliente;
-        this.analista = analista;
-
+    public Analise(Analista analista) {
+       this.analista = analista;
     }
 
     public String analisar(Cliente cliente) {
-        analisadas = new LinkedList<Double>();
+        analisadas = new LinkedList<Transacao>();
         if (analista != null) {
-            for (Double transacao : cliente.transacoesMes) { // como entrar nos dados de cliente ?
+            for (Transacao transacao : cliente.getTransacoesMes()) { // como entrar nos dados de cliente ?
                 analisadas.add(transacao);
             }
         }
         double somaValores = 0;
-        for (Double transacao : analisadas) {
-            somaValores += transacao;
+        for (Transacao transacao : analisadas) {
+            somaValores += transacao.getValor();
         }
 
         // Criterios de analise
@@ -34,15 +32,15 @@ public class Analise {
             // criterio valor das transacoes
             switch (cliente.getRisco()) {
                 case "baixo":
-                    if (somaValores > (cliente.getMovTotalMesAnterior() * 1.2)) {
+                    if (somaValores > (cliente.getMediaValorMesAnterior() * 1.2)) {
                         pontuacao++;
                     }
                 case "medio":
-                    if (somaValores > (cliente.getMovTotalMesAnterior() * 1.15)) {
+                    if (somaValores > (cliente.getMediaValorMesAnterior() * 1.15)) {
                         pontuacao++;
                     }
                 case "alto":
-                    if (somaValores > (cliente.getMovTotalMesAnterior() * 1.1)) {
+                    if (somaValores > (cliente.getMediaValorMesAnterior() * 1.1)) {
                         pontuacao++;
                     }
             }
@@ -60,15 +58,15 @@ public class Analise {
             // criterio quantidade das analises
             switch (cliente.getRisco()) {
                 case "baixo":
-                    if (analisadas.size() > (cliente.getNumTransacoes() * 1.2)) {
+                    if (analisadas.size() > (cliente.getNumTransacoesMesAnterior() * 1.2)) {
                         pontuacao++;
                     }
                 case "medio":
-                    if (analisadas.size() > (cliente.getNumTransacoes() * 1.15)) {
+                    if (analisadas.size() > (cliente.getNumTransacoesMesAnterior() * 1.15)) {
                         pontuacao++;
                     }
                 case "alto":
-                    if (analisadas.size() > (cliente.getNumTransacoes() * 1.1)) {
+                    if (analisadas.size() > (cliente.getNumTransacoesMesAnterior() * 1.1)) {
                         pontuacao++;
                     }
             }
@@ -93,4 +91,5 @@ public class Analise {
             classificacao = "Omega";
         return classificacao;
     }
+    
 }
