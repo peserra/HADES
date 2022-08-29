@@ -1,12 +1,15 @@
 package hades;
 
+import javax.management.InvalidAttributeValueException;
+
 public class Analista extends Usuario{
-    private String id;
+    private String identificador;
     private String resultadoAnalise;
 
-    public Analista(String nome, String senha, String id) {
+    public Analista(){}
+    public Analista(String nome, String senha, String identificador) throws Exception {
         super(nome, senha);
-        this.id = id;
+        setIdentificador(identificador);
         
     }
 
@@ -14,6 +17,20 @@ public class Analista extends Usuario{
         Analise analise = new Analise(this);
         resultadoAnalise = analise.analisar(cliente);
         System.out.println(resultadoAnalise);
+    }
+
+    public String getIdentificador() {
+        return identificador;
+    }
+
+    public void setIdentificador(String identificador) throws Exception {
+        
+        if(identificador.matches("\\d{6}")) {
+            this.identificador = identificador;
+        }
+        else {
+            throw new InvalidAttributeValueException("Seu identificador deve ser um numero de seis digitos na forma xxxxxx");
+        }
     }
         
 }

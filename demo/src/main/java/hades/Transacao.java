@@ -2,11 +2,17 @@ package hades;
 
 public class Transacao {
 
-    private long id; //id da transacao
+    private static long id = 0; //id da transacao
     
     private double valor; // valor da transacao
 
-    public Transacao(){}
+    public Transacao(){
+        id++;
+    }
+    public Transacao(double valor){
+        this();
+        this.valor = valor;
+    }
 
     public double getValor() {
         return valor;
@@ -16,5 +22,8 @@ public class Transacao {
         this.valor = valor;
     }
 
+    public long getId() {
+        return id;
+    }
         
 }
