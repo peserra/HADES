@@ -6,8 +6,8 @@ import java.util.List;
 public abstract class Usuario {
 
     private long id;
-    private String nome;
-    private String senha;
+    private String nome = "";
+    private String senha = "";
     private static final String CLIENTE = "Cliente";
     private static final String GERENTE = "Gerente";
     private static final String Analista = "Analista";
@@ -93,7 +93,9 @@ public abstract class Usuario {
     public static Usuario isCadastroOk(String login, String senha, String entidade) {
         cadastroOk = verificaCadastro(login, senha, entidade);
         if (cadastroOk != null) {
-            System.out.println("Usuario encontrado! Conectando...");
+            System.out.println("Usuario encontrado!");
+            System.out.println("----------------------------------------------");
+            System.out.println("Bem vindo! " + cadastroOk.getNome());
         } else {
             System.out.println("Usuario não encontrado, retornando para tela inicial");
         }
@@ -137,7 +139,7 @@ public abstract class Usuario {
     public static Usuario isAnaliseOk(String login) {
         cadastroOk = verificaCadastroAnalise(login);
         if (cadastroOk != null) {
-            System.out.println("Usuario encontrado! Conectando...");
+            System.out.println("Usuario encontrado!");
         } else {
             System.out.println("Usuario não encontrado, retornando para tela inicial");
         }
@@ -153,6 +155,7 @@ public abstract class Usuario {
             }      
         return null;
     }
+        
 
 }
 

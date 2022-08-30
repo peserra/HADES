@@ -65,6 +65,13 @@ public class Banco_de_Dados {
             printWriterAnalises.print(analise.getAnalisadas()+ ";");      
             printWriterAnalises.print(analise.getResultado()+ ";\n");
             }
+        for(Cliente cliente: listaClientes) {
+            
+            for(Transacao transacao: cliente.getTransacoesMes()) {
+                printWriterMovimentacoes.print(cliente.getNome() + ";" + cliente.getCnpj() + ";" + transacao.getValor() + ";\n");
+            }
+            printWriterMovimentacoes.println();
+        }
     
 
 

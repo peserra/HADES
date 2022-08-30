@@ -6,9 +6,9 @@ import java.util.Scanner;
 import javax.management.InvalidAttributeValueException;
 
 public class Cliente extends Usuario {
-    private String cnpj;
-    private double faturamento;
-    private String risco;
+    private String cnpj = "";
+    private double faturamento = 0;
+    private String risco = "baixo";
     private boolean paraiso = false;
     private List<Transacao> transacoesMes;
     private int numTransacoesMesAnterior = 16;
@@ -35,7 +35,7 @@ public class Cliente extends Usuario {
         if (cnpj.matches("\\d{2}.\\d{3}.\\d{3}/0001-\\d{2}")) {
             this.cnpj = cnpj;
         } else {
-            throw new InvalidAttributeValueException("cnpj deve ser da forma XX.XXX.XXX/0001-XX");
+            throw new InvalidAttributeValueException("cnpj deve ser da forma XX.XXX.XXX/0001-XX\n");
         }
     }
 
@@ -97,5 +97,6 @@ public class Cliente extends Usuario {
         if(!transacoesMes.contains(t)) {
             transacoesMes.add(t);
         }
+        System.out.println("Transação realizada com sucesso !");
     }
 }

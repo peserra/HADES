@@ -2,6 +2,7 @@ package hades;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 public class Analise {
     
@@ -63,6 +64,9 @@ public class Analise {
     public Analise(Analista analista) {
        this.analista = analista;
     }
+       
+
+    
 
     public String analisar(Cliente cliente) {
         setCliente(cliente);
@@ -144,5 +148,9 @@ public class Analise {
             classificacao = "Movimentação dentro da conformidade";
         return classificacao;
     }
+
+    
+
+
 
 }
