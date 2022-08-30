@@ -20,6 +20,7 @@ public class App {
             System.out.println("Bem vindo ao HADES! Selecione uma das funções abaixo:\n1 - Cadastrar\n2 - Fazer Login\n3 - sair");
 
             Scanner input = new Scanner(System.in);
+            
             telaInicial = input.nextInt();
 
             switch (telaInicial) {
@@ -42,6 +43,13 @@ public class App {
 
                                 System.out.println("Faturamento: ");
                                 double faturamento = input.nextDouble();
+
+                                /*System.out.println("Risco: ");
+                                String risco = input.next();
+
+                                System.out.println("Você reside em paraíso fiscal? 1 - sim ; 0 - não ");
+                                boolean paraiso = input.nextBoolean();*/
+
 
                                 cliente = new Cliente(nomeCliente, senhaCliente, cnpj, faturamento);
                                 Usuario.adicionarCliente(cliente);
@@ -110,7 +118,7 @@ public class App {
                     switch (escolhaLogin) {
                         
                         case 1:// login cliente
-                            System.out.println("Digite seu cnpj: ");
+                            System.out.println("Digite seu cnpj: "); // XX.XXX.XXX/0001-XX 11.111.111/0001-11
                             user = input.next();
                             System.out.println("Digite sua senha: ");
                             senha = input.next();
@@ -136,19 +144,87 @@ public class App {
                             break;
 
                         case 2:// login gerente
+                        boolean gerenciando = true;
                             System.out.println("Digite seu Identificador: ");
                             user = input.next();
                             System.out.println("Digite sua senha: ");
                             senha = input.next();
                             usuario = Usuario.isCadastroOk(user, senha, "Gerente");
-                            break; 
+
+                            if(usuario != null) {
+                                while(gerenciando) {
+                                    //((Cliente)usuario).realizarTransacao();
+                                    System.out.println("Escolha uma ação \n1 - setar risco e paraiso 2- Sair");
+                                    escolha = input.nextInt();
+                                   if(Integer.toString(escolha).matches("\\d{1}")) {
+    
+                                        if(escolha == 1){
+                                            String cnpj;
+                                            System.out.println("Digite o cnpj do cliente para analisar: ");
+                                            cnpj = input.next();
+                                            Usuario clienteAnalisado = Usuario.isAnaliseOk(cnpj);
+                                            System.out.println("Risco: ");
+                                            String risco = input.next();
+                                            ((Cliente)clienteAnalisado).setRisco(risco);
+                                            System.out.println("Cliente reside em paraíso fiscal? true ou false ");
+                                            boolean paraiso = input.nextBoolean();
+                                            ((Cliente)clienteAnalisado).setParaiso(paraiso);
+
+                                        }
+                                        if(escolha == 2) {
+                                            gerenciando = false;
+                                        } else if (escolha != 1) {
+                                            System.out.println("Opção invalida.\n1 - Solicitar analise 2- Sair");
+                                        }
+                                   } else {
+                                    System.out.println("Apenas um numero é aceito como resposta");
+                                   }
+                                }
+                            }
+
+                            break;
+
                         case 3:// login analista
+                        boolean analisando = true;
+                        System.out.println("Digite seu Identificador: ");
+                        user = input.next();
+                        System.out.println("Digite sua senha: ");
+                        senha = input.next();
+                        usuario = Usuario.isCadastroOk(user, senha, "Analista");
+
+                        if(usuario != null) {
+                            while(analisando) {
+                                //((Cliente)usuario).realizarTransacao();
+                                System.out.println("Escolha uma ação \n1 - iniciar analise 2- Sair");
+                                escolha = input.nextInt();
+                               if(Integer.toString(escolha).matches("\\d{1}")) {
+
+                                    if(escolha == 1){
+                                        Analise analise = new Analise((Analista)usuario);
+                                        String cnpj;
+                                        System.out.println("Digite o cnpj do cliente para analisar: ");
+                                        cnpj = input.next();
+                                        Usuario clienteAnalisado = Usuario.isAnaliseOk(cnpj);
+                                        analise.analisar((Cliente)clienteAnalisado);
+                                    }
+                                    if(escolha == 2) {
+                                        analisando = false;
+                                    } else if (escolha != 1) {
+                                        System.out.println("Opção invalida.\n1 - Solicitar analise 2- Sair");
+                                    }
+                               } else {
+                                System.out.println("Apenas um numero é aceito como resposta");
+                               }
+                            }
+                        }
+                        break; 
 
                     }
                     break;
                 case 3:
                     System.out.println("Obrigado por utilizar o Hades");
                     execute = false;
+                    input.close();
 
             }
 
