@@ -30,7 +30,7 @@ public class Analise {
         // Criterios de analise
         try {
             // criterio valor das transacoes
-            switch (cliente.getRisco()) {
+            switch (cliente.getRisco().toLowerCase()) {
                 case "baixo":
                     if (somaValores > (cliente.getMediaValorMesAnterior() * 1.2)) {
                         pontuacao++;
@@ -56,7 +56,7 @@ public class Analise {
             }
 
             // criterio quantidade das analises
-            switch (cliente.getRisco()) {
+            switch (cliente.getRisco().toLowerCase()) {
                 case "baixo":
                     if (analisadas.size() > (cliente.getNumTransacoesMesAnterior() * 1.2)) {
                         pontuacao++;
@@ -72,12 +72,13 @@ public class Analise {
             }
 
             resultado = classificar(pontuacao);
+            System.out.println("o resultado da análise foi: "+ resultado);
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
             resultado = "Não foi possível analisar, tente novamente";
         } finally {
-            System.out.println("Fim da analise");
+            System.out.println("\nFim da analise");
         }
         return resultado;
 
@@ -87,8 +88,10 @@ public class Analise {
         classificacao = "";
         if (pontuacao > 0 && pontuacao <= 2)
             classificacao = "Alpha";
-        else
+        else if (pontuacao > 2)
             classificacao = "Omega";
+        else
+            classificacao = "Movimentação dentro da conformidade";
         return classificacao;
     }
     

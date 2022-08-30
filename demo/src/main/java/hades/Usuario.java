@@ -133,4 +133,26 @@ public abstract class Usuario {
         return null;
     }
 
+
+    public static Usuario isAnaliseOk(String login) {
+        cadastroOk = verificaCadastroAnalise(login);
+        if (cadastroOk != null) {
+            System.out.println("Usuario encontrado! Conectando...");
+        } else {
+            System.out.println("Usuario não encontrado, retornando para tela inicial");
+        }
+        return cadastroOk;
+    }
+    private static Usuario verificaCadastroAnalise(String login) {
+            if (!listaClientes.isEmpty()) {
+                for (Cliente cliente : listaClientes) {
+                    if ((cliente.getCnpj().equals(login))) {
+                        return cliente;
+                    }
+                }
+            }      
+        return null;
+    }
+
 }
+

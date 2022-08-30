@@ -18,12 +18,13 @@ public class Cliente extends Usuario {
     public Cliente() {
     }
 
-    public Cliente(String nome, String senha, String cnpj, double faturamento) throws Exception {
+    public Cliente(String nome, String senha, String cnpj, double faturamento ) throws Exception {
         super(nome, senha);
         transacoesMes = new LinkedList<Transacao>();
         setCnpj(cnpj);
         setFaturamento(faturamento);
-
+        setRisco(risco);
+        setParaiso(paraiso);
     }
 
     public String getCnpj() {
