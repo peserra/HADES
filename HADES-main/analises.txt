@@ -1,5 +1,0 @@
-hades.Cliente@5b480cf9;hades.Analista@6f496d9f;[hades.Transacao@723279cf];Movimentação dentro da conformidade;
-hades.Cliente@10f87f48;hades.Analista@6f496d9f;[hades.Transacao@b4c966a];Alpha;
-hades.Cliente@5b480cf9;hades.Analista@6f496d9f;[hades.Transacao@723279cf];Omega;
-hades.Cliente@6f496d9f;hades.Analista@723279cf;[hades.Transacao@10f87f48, hades.Transacao@b4c966a];Alpha;
-hades.Cliente@6f496d9f;hades.Analista@723279cf;[hades.Transacao@10f87f48, hades.Transacao@b4c966a];Alpha;

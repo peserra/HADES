@@ -60,10 +60,9 @@ public class Banco_de_Dados {
             printWriterAnalistas.print(analista.getIdentificador()+ ";\n");
             }
         for(Analise analise : listaAnalise){
-            printWriterAnalises.print(analise.getCliente()+ ";");
-            printWriterAnalises.print(analise.getAnalista()+ ";");   
-            printWriterAnalises.print(analise.getAnalisadas()+ ";");      
-            printWriterAnalises.print(analise.getResultado()+ ";\n");
+            printWriterAnalises.print(analise.getCliente().getNome()+ ";");
+            printWriterAnalises.print(analise.getAnalista().getNome()+ ";");   
+            printWriterAnalises.print(analise.getResultado() + ";\n");
             }
         for(Cliente cliente: listaClientes) {
             
